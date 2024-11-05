@@ -1,0 +1,61 @@
+tasks = []
+
+def userSpeaker():
+    while True:
+        print("\nKuidas ma võin aidata?")
+        print("1. Lisa ülesanne")
+        print("2. Vaata ülesandeid")
+        print("3. Kustuta ülesanne")
+        print("4. Lõpeta")
+        
+        userInput = input("Vali tegevus (1-4): ")
+        
+        if userInput.isdigit():
+            userInput = int(userInput)
+        else:
+            print("Vale sisend, palun sisesta number vahemikust 1-4.")
+            continue
+
+        if userInput == 1:
+            add_task()
+        elif userInput == 2:
+            view_task()
+        elif userInput == 3:
+            delete_task()
+        elif userInput == 4:
+            print("Programm suletud.")
+            break
+        else:
+            print("Vale valik, palun proovi uuesti.")
+
+def add_task():
+    task = input("Sisesta uus ülesanne: ")
+    tasks.append(task)
+    print(f"Ülesanne '{task}' on lisatud!")
+
+def view_task():
+    if tasks:
+        print("\nKõik ülesanded:")
+        for index, task in enumerate(tasks, 1):
+            print(f"{index}. {task}")
+    else:
+        print("Ülesanded puuduvad.")
+
+def delete_task():
+    if tasks:
+        try:
+            task_id = int(input("Sisesta ülesande number, mida soovid kustutada: "))
+            if 1 <= task_id <= len(tasks):
+                removed_task = tasks.pop(task_id - 1)
+                print(f"Ülesanne '{removed_task}' on kustutatud!")
+            else:
+                print("Vale ülesande number.")
+        except ValueError:
+            print("Palun sisesta kehtiv number.")
+    else:
+        print("Ülesandeid pole kustutamiseks.")
+
+userSpeaker()
+
+
+    
